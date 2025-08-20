@@ -21,12 +21,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Krok 2: Ustawienie środowiska Java w wersji 16 (zgodnie z Twoim plikiem pom.xml)
-      - name: Set up JDK 16
+      # Krok 2: Ustawienie środowiska Java w wersji 21 (zgodnie z nowymi zależnościami)
+      - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
-          java-version: '16'
-          distribution: 'temurin' # Popularna dystrybucja OpenJDK
+          java-version: '21' # ZMIANA Z 16 NA 21
+          distribution: 'temurin'
 
       # Krok 3: Cache'owanie zależności Mavena, aby przyspieszyć przyszłe buildy
       - name: Cache Maven packages
@@ -42,7 +42,6 @@ jobs:
         run: mvn -B package --file pom.xml
 
       # Krok 5 (Opcjonalny): Przesłanie zbudowanego pliku .jar jako artefaktu
-      # Dzięki temu będziesz mógł pobrać gotową wtyczkę bezpośrednio z GitHuba
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
