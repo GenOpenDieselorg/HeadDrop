@@ -1,0 +1,50 @@
+# Nazwa przepływu pracy (workflow), widoczna w zakładce "Actions" na GitHubie
+name: Java CI with Maven
+
+# Definiuje, kiedy akcja ma być uruchamiana
+on:
+  # Uruchom przy każdym push na gałąź "main"
+  push:
+    branches: [ "main" ]
+  # Uruchom przy każdym pull request skierowanym do gałęzi "main"
+  pull_request:
+    branches: [ "main" ]
+
+# Definiuje zadania do wykonania
+jobs:
+  build:
+    # Uruchom na najnowszej dostępnej maszynie wirtualnej z systemem Ubuntu
+    runs-on: ubuntu-latest
+
+    steps:
+      # Krok 1: Pobranie kodu z Twojego repozytorium
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Krok 2: Ustawienie środowiska Java w wersji 16 (zgodnie z Twoim plikiem pom.xml)
+      - name: Set up JDK 16
+        uses: actions/setup-java@v4
+        with:
+          java-version: '16'
+          distribution: 'temurin' # Popularna dystrybucja OpenJDK
+
+      # Krok 3: Cache'owanie zależności Mavena, aby przyspieszyć przyszłe buildy
+      - name: Cache Maven packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      # Krok 4: Zbudowanie projektu za pomocą Mavena
+      - name: Build with Maven
+        run: mvn -B package --file pom.xml
+
+      # Krok 5 (Opcjonalny): Przesłanie zbudowanego pliku .jar jako artefaktu
+      # Dzięki temu będziesz mógł pobrać gotową wtyczkę bezpośrednio z GitHuba
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: HeadDrop-Free
+          path: target/*.jar
