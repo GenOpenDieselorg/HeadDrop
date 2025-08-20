@@ -133,9 +133,9 @@ public class EntityDeath implements Listener {
             return;
         }
 
-        if (worldGuardEnabled && !WorldGuardSupport.canDrop(entity.getLocation())) {
-            return;
-        }
+        // if (worldGuardEnabled && !WorldGuardSupport.canDrop(entity.getLocation())) {
+        //     return;
+        // }
 
         double lootBonus = 0;
         boolean enableLooting = config.getBoolean("Config.Enable-Looting");
