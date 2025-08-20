@@ -21,10 +21,18 @@ public class ItemUtils {
 
         rawLore.forEach(lore -> {
             if (!lore.equalsIgnoreCase("")) {
+                ItemStack weapon = killer != null ? killer.getInventory().getItemInMainHand() : null;
+                String weaponName = "Unknown";
+                if (weapon != null && weapon.hasItemMeta() && weapon.getItemMeta().hasDisplayName()) {
+                    weaponName = weapon.getItemMeta().getDisplayName();
+                } else if (weapon != null) {
+                    weaponName = weapon.getType().toString();
+                }
+
                 lore = lore
                         .replace("{KILLER}", killer != null ? killer.getName() : "Unknown")
                         .replace("{DATE}", LocalDate.now().toString())
-                        .replace("{WEAPON}", killer != null ? killer.getInventory().getItemInMainHand().getType().toString() : "Unknown");
+                        .replace("{WEAPON}", weaponName);
                 if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
                     lore = killer != null ? PlaceholderAPI.setPlaceholders(killer, lore) : PlaceholderAPI.setPlaceholders(null, lore);
                 }
