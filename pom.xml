@@ -5,7 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>me.rrs</groupId>
-    <artifactId>6.0.0/artifactId>
+
+    <artifactId>HeadDrop-Free</artifactId>
     <version>6.0.0</version>
 
     <build>
@@ -163,5 +164,6 @@
         </dependency>
     </dependencies>
 </project>
+
 
 
