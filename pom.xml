@@ -6,8 +6,8 @@
 
     <groupId>me.rrs</groupId>
 
-    <artifactId>HeadDrop-Free</artifactId>
-    <version>6.0.0</version>
+    <artifactId>HeadDrop-pro</artifactId>
+    <version>5.4.6</version>
 
     <build>
         <plugins>
@@ -164,6 +164,7 @@
         </dependency>
     </dependencies>
 </project>
+
 
 
 
