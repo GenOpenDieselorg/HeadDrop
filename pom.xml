@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>me.rrs</groupId>
-    <artifactId>HeadDrop-2.0.0/artifactId>
-    <version>5.4.5</version>
+    <artifactId>6.0.0/artifactId>
+    <version>6.0.0</version>
 
     <build>
         <plugins>
@@ -163,4 +163,5 @@
         </dependency>
     </dependencies>
 </project>
+
 
