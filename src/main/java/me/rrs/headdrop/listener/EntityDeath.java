@@ -479,7 +479,7 @@ public class EntityDeath implements Listener {
             entityActions.put(EntityType.WOLF, event -> handleEntityDrop(event, "WOLF",
                     () -> {
                         Wolf wolf = (Wolf) event.getEntity();
-                        String variant = wolf.getVariant().toString().toUpperCase().replace("MINECRAFT:", "");
+                        String variant = wolf.getVariant().getKey().getKey().toUpperCase();
                         switch (variant) {
                             case "ASHEN" -> {
                                 if (wolf.isAngry()) {
@@ -581,11 +581,12 @@ public class EntityDeath implements Listener {
                     () -> {
                         try {
                             Chicken chicken = (Chicken) event.getEntity();
-                            return switch (chicken.getVariant().toString()) {
-                                case "COLD" -> EntityHead.CHICKEN_COLD.getSkull();
-                                case "WARM" -> EntityHead.CHICKEN_WARM.getSkull();
-                                case "TEMPERATE" -> EntityHead.CHICKEN_TEMPERATE.getSkull();
-                                default -> throw new IllegalStateException("Unexpected value: " + chicken.getVariant());
+                            String variantKey = chicken.getVariant().getKey().getKey();
+                            return switch (variantKey) {
+                                case "cold" -> EntityHead.CHICKEN_COLD.getSkull();
+                                case "warm" -> EntityHead.CHICKEN_WARM.getSkull();
+                                case "temperate" -> EntityHead.CHICKEN_TEMPERATE.getSkull();
+                                default -> EntityHead.CHICKEN_TEMPERATE.getSkull(); // Default to temperate
                             };
                         } catch (NoSuchMethodError | IllegalArgumentException e) {
                             return EntityHead.CHICKEN_TEMPERATE.getSkull();
@@ -597,12 +598,12 @@ public class EntityDeath implements Listener {
                     () -> {
                         try {
                             Cow cow = (Cow) event.getEntity();
-                            return switch (cow.getVariant().toString()) {
-                                case "COLD" -> EntityHead.COW_COLD.getSkull();
-                                case "WARM" -> EntityHead.COW_WARM.getSkull();
-                                case "TEMPERATE" -> EntityHead.COW_TEMPERATE.getSkull();
-                                default ->
-                                        throw new IllegalStateException("Unexpected value: " + cow.getVariant());
+                            String variantKey = cow.getVariant().getKey().getKey();
+                            return switch (variantKey) {
+                                case "cold" -> EntityHead.COW_COLD.getSkull();
+                                case "warm" -> EntityHead.COW_WARM.getSkull();
+                                case "temperate" -> EntityHead.COW_TEMPERATE.getSkull();
+                                default -> EntityHead.COW_TEMPERATE.getSkull();
                             };
                         } catch (NoSuchMethodError | IllegalArgumentException e) {
                             return EntityHead.COW_TEMPERATE.getSkull();
@@ -614,11 +615,12 @@ public class EntityDeath implements Listener {
                     () -> {
                         try {
                             Pig pig = (Pig) event.getEntity();
-                            return switch (pig.getVariant().toString()){
-                                case "COLD" -> EntityHead.PIG_COLD.getSkull();
-                                case "WARM" -> EntityHead.PIG_WARM.getSkull();
-                                case "TEMPERATE" -> EntityHead.PIG_TEMPERATE.getSkull();
-                                default -> throw new IllegalStateException("Unexpected value: " + pig.getVariant());
+                            String variantKey = pig.getVariant().getKey().getKey();
+                            return switch (variantKey){
+                                case "cold" -> EntityHead.PIG_COLD.getSkull();
+                                case "warm" -> EntityHead.PIG_WARM.getSkull();
+                                case "temperate" -> EntityHead.PIG_TEMPERATE.getSkull();
+                                default -> EntityHead.PIG_TEMPERATE.getSkull();
                             };
                         } catch (NoSuchMethodError | IllegalArgumentException e) {
                             return EntityHead.PIG_TEMPERATE.getSkull();
