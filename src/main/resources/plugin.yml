@@ -3,7 +3,7 @@ version: '${project.version}'
 main: me.rrs.headdrop.HeadDrop
 api-version: 1.13
 folia-supported: true
-author: RRS
+author: genallthebest
 prefix: HeadDrop
 softdepend:
   - PlaceholderAPI
